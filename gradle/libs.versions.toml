@@ -12,6 +12,8 @@ constraintlayout = "2.2.1"
 lottie = "6.0.0"
 navigationFragmentKtx = "2.8.9"
 navigationUiKtx = "2.8.9"
+firebase = "33.12.0"
+firebaseAuthKtx = "23.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,6 +27,11 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+firebase = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase"}
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

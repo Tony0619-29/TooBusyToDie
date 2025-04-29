@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "254065091605",
+    "project_id": "tobusytodie-97209",
+    "storage_bucket": "tobusytodie-97209.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254065091605:android:a29933176e724206a15a1c",
+        "android_client_info": {
+          "package_name": "com.example.tobusytodie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFaPoDDBZyLnF7xqqoVNkK3n-KftAvlmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

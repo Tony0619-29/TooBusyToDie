@@ -52,4 +52,10 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     //Implementacion de Lottie
     implementation(libs.lottie)
+    //Implementacion de Firebase
+    implementation(platform(libs.firebase))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth.ktx)
+
 }
