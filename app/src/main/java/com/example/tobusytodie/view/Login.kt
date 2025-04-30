@@ -1,42 +1,108 @@
 package com.example.tobusytodie.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.example.tobusytodie.R
 import com.example.tobusytodie.databinding.FragmentLoginBinding
+import com.example.tobusytodie.utils.FragmentCommunicator
+import com.example.tobusytodie.viewModel.LoginViewModel
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+
 
 class Login : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+   private val viewModel by viewModels<LoginViewModel>()
+    var isValid : Boolean = false
+    private lateinit var communicator: FragmentCommunicator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        communicator = requireActivity() as MainActivity//inicializamos punto de entrada al contrato
+        setupView()
+        setupObservers()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        binding.button2.setOnClickListener {
+    private fun setupView(){
+
+        //cuando de click en el boton de login
+        binding.botonIngresar.setOnClickListener {
+            //validar que se ingresen en los campos datos
+            if(isValid){
+                requestLogin()
+            }else{
+                Toast.makeText(activity, "Datos Invalidos ", Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.emailTIET.addTextChangedListener{
+            if(binding.emailTIET.text.toString().isEmpty()){
+                binding.textInputLayout.error = "Campo requerido"
+                isValid = false
+            }else{
+                isValid = true
+            }
+        }
+
+        binding.passwordTIET.addTextChangedListener{
+            if (binding.passwordTIET.text.toString().isEmpty()) {
+                binding.textInputLayout2.error = "Campo requerido"
+                isValid = false
+            } else {
+                isValid = true
+            }
+        }
+
+        binding.botonRegistrarDeLogin.setOnClickListener {
             findNavController().navigate(R.id.action_login2_to_register2)
         }
 
+
     }
+    private fun setupObservers(){
+        //accedemos a los publisher y con el observer definimos quien es el encargado del ciclo de vida
+        viewModel.loaderState.observe(viewLifecycleOwner){ loaderState ->
+            communicator.showLoader(loaderState)//llamamos al loader para mostrarlo
+        }
+        //accedemos a los publisher y con el observer definimos quien es el encargado del ciclo de vida
+        viewModel.sessionValid.observe(viewLifecycleOwner) { sessionValid ->
+            if (sessionValid) {//si el usuario existe
+
+
+                //llamamos a la actividad principal
+                val intent = Intent(activity, MainActivity::class.java)//llamamos a la actividad para inciar nuevo flujo
+                findNavController().navigate(R.id.action_login2_to_firstFragment)
+                //activamos la  actividad principal
+                startActivity(intent)
+                activity?.finish() //cerramos la actividad actual
+            }else{
+                //mandamos mensaje
+                Toast.makeText(activity, "Ingreso invalido", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+    private fun requestLogin() { //aqui le mandamos a la funcion requestSingnIn del viewModel los datos que ingresaron
+        viewModel.requestSingnIn(binding.emailTIET.text.toString(),
+            binding.passwordTIET.text.toString())
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = Login()
-    }
+
 }
