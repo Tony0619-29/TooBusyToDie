@@ -30,7 +30,7 @@
     </include>
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.tobusytodie.view.FirstFragment"
+        android:name="com.example.tobusytodie.FirstFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_first" >
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.example.tobusytodie.view.SecondFragment"
+        android:name="com.example.tobusytodie.SecondFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.tobusytodie.view
+package com.example.tobusytodie
 
 import androidx.fragment.app.Fragment
 

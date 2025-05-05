@@ -1,4 +1,4 @@
-package com.example.tobusytodie.view
+package com.example.tobusytodie
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tobusytodie.databinding.FragmentSecondBinding
 import com.example.tobusytodie.utils.FragmentCommunicator
+import com.example.tobusytodie.view.MainActivity
 
 
 class SecondFragment : Fragment() {

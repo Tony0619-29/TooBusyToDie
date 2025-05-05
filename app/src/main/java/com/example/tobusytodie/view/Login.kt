@@ -14,9 +14,11 @@ import com.example.tobusytodie.utils.FragmentCommunicator
 import com.example.tobusytodie.viewModel.LoginViewModel
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.tobusytodie.ListActivity
 
 
 class Login : Fragment() {
+
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
    private val viewModel by viewModels<LoginViewModel>()
@@ -28,7 +30,7 @@ class Login : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        communicator = requireActivity() as MainActivity//inicializamos punto de entrada al contrato
+        communicator = requireActivity() as OnboardingActivity
         setupView()
         setupObservers()
         return binding.root
@@ -39,7 +41,7 @@ class Login : Fragment() {
 
         //cuando de click en el boton de login
         binding.botonIngresar.setOnClickListener {
-            //validar que se ingresen en los campos datos
+
             if(isValid){
                 requestLogin()
             }else{
@@ -48,7 +50,7 @@ class Login : Fragment() {
         }
         binding.emailTIET.addTextChangedListener{
             if(binding.emailTIET.text.toString().isEmpty()){
-                binding.textInputLayout.error = "Campo requerido"
+                binding.emailTIET.error = "Campo requerido"
                 isValid = false
             }else{
                 isValid = true
@@ -57,7 +59,7 @@ class Login : Fragment() {
 
         binding.passwordTIET.addTextChangedListener{
             if (binding.passwordTIET.text.toString().isEmpty()) {
-                binding.textInputLayout2.error = "Campo requerido"
+                binding.passwordTIET.error = "Campo requerido"
                 isValid = false
             } else {
                 isValid = true
@@ -71,7 +73,6 @@ class Login : Fragment() {
 
     }
     private fun setupObservers(){
-        //accedemos a los publisher y con el observer definimos quien es el encargado del ciclo de vida
         viewModel.loaderState.observe(viewLifecycleOwner){ loaderState ->
             communicator.showLoader(loaderState)//llamamos al loader para mostrarlo
         }
@@ -79,13 +80,11 @@ class Login : Fragment() {
         viewModel.sessionValid.observe(viewLifecycleOwner) { sessionValid ->
             if (sessionValid) {//si el usuario existe
 
-
                 //llamamos a la actividad principal
-                val intent = Intent(activity, MainActivity::class.java)//llamamos a la actividad para inciar nuevo flujo
+                val intent = Intent(activity, ListActivity::class.java)//llamamos a la actividad para inciar nuevo flujo
                 findNavController().navigate(R.id.action_login2_to_firstFragment)
-                //activamos la  actividad principal
                 startActivity(intent)
-                activity?.finish() //cerramos la actividad actual
+                activity?.finish()
             }else{
                 //mandamos mensaje
                 Toast.makeText(activity, "Ingreso invalido", Toast.LENGTH_SHORT).show()
@@ -93,7 +92,7 @@ class Login : Fragment() {
 
         }
     }
-    private fun requestLogin() { //aqui le mandamos a la funcion requestSingnIn del viewModel los datos que ingresaron
+    private fun requestLogin() { //aqui le mandamos a la funcion  del viewModel los datos que ingresaron
         viewModel.requestSingnIn(binding.emailTIET.text.toString(),
             binding.passwordTIET.text.toString())
     }
