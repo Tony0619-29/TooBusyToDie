@@ -82,7 +82,6 @@ class Login : Fragment() {
 
                 //llamamos a la actividad principal
                 val intent = Intent(activity, ListActivity::class.java)//llamamos a la actividad para inciar nuevo flujo
-                findNavController().navigate(R.id.action_login2_to_firstFragment)
                 startActivity(intent)
                 activity?.finish()
             }else{

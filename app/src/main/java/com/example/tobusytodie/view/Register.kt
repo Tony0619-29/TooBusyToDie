@@ -27,27 +27,16 @@ class Register : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        communicator = requireActivity() as MainActivity
+        communicator = requireActivity() as OnboardingActivity
         setupView()
         return binding.root
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.flechaLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_register2_to_login2)
-        }
-
-    }
-
-
-
 
     private fun setupView() {
         binding.flechaLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_register2_to_login2)
         }
 
         binding.buttonRegistrar.setOnClickListener {
@@ -57,27 +46,36 @@ class Register : Fragment() {
             )
         }
 
-
-        //valida que se ingresen los datos
-        binding.tietEmail.addTextChangedListener {
-            if (binding.tietEmail.text.toString().isEmpty()) {
-                binding.textInputLayout4.error = "Por favor introduce un correo"
+        binding.tietNombre.addTextChangedListener {
+            if (binding.tietNombre.text.toString().isEmpty()) {
+                binding.txtNombreRegister.error = "Por favor introduce un nombre"
                 isValid = false
             } else {
                 isValid = true
             }
         }
+            //valida que se ingresen los datos
+        binding.tietEmail.addTextChangedListener {
+                if (binding.tietEmail.text.toString().isEmpty()) {
+                    binding.txtCorreoRegister.error = "Por favor introduce un correo"
+                    isValid = false
+                } else {
+                    isValid = true
+                }
+            }
 
         binding.tietPassword.addTextChangedListener {
-            if (binding.tietPassword.text.toString().isEmpty()) {
-                binding.textInputLayout5.error = "Por favor introduce un correo"
-                isValid = false
-            } else {
-                isValid = true
+                if (binding.tietPassword.text.toString().isEmpty()) {
+                    binding.txtContrasenaRegister.error = "Por favor introduce un correo"
+                    isValid = false
+                } else {
+                    isValid = true
+                }
             }
-        }
-
+        setupObservers()
     }
+
+
     private fun setupObservers() {
         viewModel.loaderState.observe(viewLifecycleOwner) { loaderState ->
             communicator.showLoader(loaderState)
@@ -89,5 +87,8 @@ class Register : Fragment() {
             }
         }
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

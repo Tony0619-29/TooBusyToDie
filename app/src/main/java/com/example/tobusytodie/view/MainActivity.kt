@@ -1,20 +1,22 @@
 package com.example.tobusytodie.view
 
 import android.os.Bundle
-import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tobusytodie.databinding.ActivityMainBinding
-import com.example.tobusytodie.utils.FragmentCommunicator
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.tobusytodie.R
 
-class MainActivity : AppCompatActivity(), FragmentCommunicator {
-    private lateinit var binding: ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-    }
-
-    override fun showLoader(value: Boolean) {
-        binding.loaderContainerView.visibility = if (value) View.VISIBLE else View.GONE
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
     }
 }
