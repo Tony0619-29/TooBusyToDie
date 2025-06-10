@@ -20,19 +20,19 @@ class RegisterViewModel : ViewModel() {
     //publisher para el registro
     private val _validRegister = MutableLiveData<Boolean>()
     val validRegister: LiveData<Boolean>
-        get() = _validRegister //obtiene boolean de register
+        get() = _validRegister
 
-    private val firebase = FirebaseAuth.getInstance() //instancia
+    private val firebase = FirebaseAuth.getInstance()
 
     //funcion para registrar
     fun requestSignUp(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            _loaderState.value = true //muestra loader por que comienza corrutina
+            _loaderState.value = true
 
-            viewModelScope.launch { //inicia corrutina
+            viewModelScope.launch {
                 val result = firebase.createUserWithEmailAndPassword(email, password).await()
-                _loaderState.value = false //cuando termina corrutina oculta loader
-                //mensajes para verificar estado de registro
+                _loaderState.value = false
+
                 result.user?.let {
                     delay(5000)
                     Log.i("Firebase", "Se creó al usuario con éxito.")

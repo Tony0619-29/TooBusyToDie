@@ -12,19 +12,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToBusyToDie"
         tools:targetApi="31">
+
         <activity
             android:name=".ListActivity"
             android:exported="false"
             android:theme="@style/Theme.ToBusyToDie" />
         <activity
             android:name=".view.MainActivity"
-            android:exported="true">
+            android:exported="false"
+            android:theme="@style/Theme.ToBusyToDie" />
+
+        <activity android:name=".view.OnboardingActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ToBusyToDie">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+
     </application>
 
 </manifest>

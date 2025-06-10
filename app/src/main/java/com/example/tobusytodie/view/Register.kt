@@ -54,7 +54,7 @@ class Register : Fragment() {
                 isValid = true
             }
         }
-            //valida que se ingresen los datos
+
         binding.tietEmail.addTextChangedListener {
                 if (binding.tietEmail.text.toString().isEmpty()) {
                     binding.txtCorreoRegister.error = "Por favor introduce un correo"
