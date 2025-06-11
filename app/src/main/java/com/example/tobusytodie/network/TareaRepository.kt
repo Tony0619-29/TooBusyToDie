@@ -6,6 +6,9 @@ import com.example.tobusytodie.model.Tarea
 import com.google.firebase.firestore.FirebaseFirestore
 import jakarta.inject.Inject
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class TareaRepository @Inject constructor(
@@ -28,17 +31,6 @@ class TareaRepository @Inject constructor(
         }
     }
 
-    /* POR SI NO FUNCIONA LA PARTE DE ARRIBA
-            * suspend fun getTareaById(id: String): ResultWrapper<Tarea> = safeCall {
-            val doc = tareasCollection.document(id).get().await()
-            doc.toObject(Tarea::class.java) ?: throw Exception("Tarea no encontrada")
-        }
-
-        suspend fun getAllTareas(): ResultWrapper<List<Tarea>> = safeCall {
-            val snapshot = tareasCollection.get().await()
-            snapshot.toObjects(Tarea::class.java)
-        }
-        */
 
     suspend fun updateTarea(tarea: Tarea): ResultWrapper<Void> = safeCall {
         tareasCollection.document(tarea.id).set(tarea).await()

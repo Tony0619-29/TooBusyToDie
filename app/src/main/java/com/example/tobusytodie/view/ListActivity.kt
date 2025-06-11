@@ -7,7 +7,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import com.example.tobusytodie.R
 import com.example.tobusytodie.databinding.ActivityListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
