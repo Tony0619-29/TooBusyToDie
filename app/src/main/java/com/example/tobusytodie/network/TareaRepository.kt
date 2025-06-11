@@ -28,7 +28,7 @@ class TareaRepository @Inject constructor(
         }
     }
 
-    /*
+    /* POR SI NO FUNCIONA LA PARTE DE ARRIBA
             * suspend fun getTareaById(id: String): ResultWrapper<Tarea> = safeCall {
             val doc = tareasCollection.document(id).get().await()
             doc.toObject(Tarea::class.java) ?: throw Exception("Tarea no encontrada")
@@ -39,7 +39,6 @@ class TareaRepository @Inject constructor(
             snapshot.toObjects(Tarea::class.java)
         }
         */
-
 
     suspend fun updateTarea(tarea: Tarea): ResultWrapper<Void> = safeCall {
         tareasCollection.document(tarea.id).set(tarea).await()

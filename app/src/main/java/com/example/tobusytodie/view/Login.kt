@@ -14,7 +14,7 @@ import com.example.tobusytodie.utils.FragmentCommunicator
 import com.example.tobusytodie.viewModel.LoginViewModel
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.tobusytodie.ListActivity
+import com.example.tobusytodie.view.ListActivity
 
 
 class Login : Fragment() {
