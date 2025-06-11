@@ -20,16 +20,22 @@ class TareaRepository @Inject constructor(
     suspend fun createTarea(tarea: Tarea): ResultWrapper<Void> = safeCall {
         tareasCollection.document(tarea.id).set(tarea).await()
     }
-
     suspend fun getTareas(id: String? = null): ResultWrapper<Any> = safeCall {
         if (id != null) {
             val doc = tareasCollection.document(id).get().await()
-            doc.toObject(Tarea::class.java) ?: throw Exception("Tarea no encontrada")
+            val tarea = doc.toObject(Tarea::class.java)
+            val timestamp = doc.getTimestamp("date")
+            tarea?.copy(date = timestamp?.toDate() ?: Date()) ?: throw Exception("Tarea no encontrada")
         } else {
             val snapshot = tareasCollection.get().await()
-            snapshot.toObjects(Tarea::class.java)
+            snapshot.documents.mapNotNull { document ->
+                val tarea = document.toObject(Tarea::class.java)
+                val timestamp = document.getTimestamp("date")
+                tarea?.copy(date = timestamp?.toDate() ?: Date())
+            }
         }
     }
+
 
 
     suspend fun updateTarea(tarea: Tarea): ResultWrapper<Void> = safeCall {

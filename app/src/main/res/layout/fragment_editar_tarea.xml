@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#897D7D"
-    tools:context=".editarTarea">
+    tools:context=".view.EditarTareaFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardEditarTarea"

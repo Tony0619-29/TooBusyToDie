@@ -6,32 +6,40 @@
     app:startDestination="@id/pendientesFragment">
 
     <fragment
-        android:id="@+id/editarTarea"
-        android:name="com.example.tobusytodie.editarTarea"
-        android:label="fragment_editar_tarea"
-        tools:layout="@layout/fragment_editar_tarea" >
-        <action
-            android:id="@+id/action_editarTarea_to_pendientesFragment"
-            app:destination="@id/pendientesFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/agregarFragment"
-        android:name="com.example.tobusytodie.view.AgregarFragment"
-        android:label="fragment_agregar"
-        tools:layout="@layout/fragment_agregar" >
-        <action
-            android:id="@+id/action_agregarFragment_to_pendientesFragment"
-            app:destination="@id/pendientesFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/pendientesFragment"
-        android:name="com.example.tobusytodie.PendientesFragment"
-        android:label="PendientesFragment" >
+        android:name="com.example.tobusytodie.view.PendientesFragment"
+        android:label="PendientesFragment"
+        tools:layout="@layout/fragment_pendientes">
+
         <action
             android:id="@+id/action_pendientesFragment_to_editarTarea"
             app:destination="@id/editarTarea" />
         <action
             android:id="@+id/action_pendientesFragment_to_agregarFragment"
             app:destination="@id/agregarFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editarTarea"
+        android:name="com.example.tobusytodie.view.EditarTareaFragment"
+        android:label="Editar Tarea"
+        tools:layout="@layout/fragment_editar_tarea">
+
+        <argument
+            android:name="tareaId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editarTarea_to_pendientesFragment"
+            app:destination="@id/pendientesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/agregarFragment"
+        android:name="com.example.tobusytodie.view.AgregarFragment"
+        android:label="Agregar Tarea"
+        tools:layout="@layout/fragment_agregar" >
+        <action
+            android:id="@+id/action_agregarFragment_to_pendientesFragment"
+            app:destination="@id/pendientesFragment" />
     </fragment>
 </navigation>
