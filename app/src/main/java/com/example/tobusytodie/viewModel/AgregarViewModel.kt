@@ -85,10 +85,15 @@ class AgregarViewModel @Inject constructor(
         viewModelScope.launch {
             _loading.value = true
             val result = tareaRepository.deleteTarea(id)
-            handleResult(result)
+            if (result is ResultWrapper.Success) {
+                getTareas() // vuelve a cargar para reflejar los cambios
+            } else {
+                handleResult(result)
+            }
             _loading.value = false
         }
     }
+
 
     private fun handleResult(result: ResultWrapper<Void>) {
         when (result) {

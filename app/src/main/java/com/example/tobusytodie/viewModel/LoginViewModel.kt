@@ -31,7 +31,6 @@ class LoginViewModel : ViewModel(){
             val result = firebase.signInWithEmailAndPassword(email, password).await()
             _loaderState.value = false //desactivamos loader
             result.user?.let { //si el usuario existe
-                delay(5000)
                 _sessionValid.value = true
             } ?: run {
                 Log.i("firebase", "Ocurrio un error querido contribuidor :0")
